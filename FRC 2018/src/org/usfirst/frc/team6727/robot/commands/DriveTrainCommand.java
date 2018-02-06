@@ -22,7 +22,7 @@ public class DriveTrainCommand extends Command {
     	double leftStickValue = Robot.m_oi.getController().getRawAxis(1), 
     			rightStickValue = Robot.m_oi.getController().getRawAxis(5);
     	
-    	Robot.driveTrainSub.tankDrive(leftStickValue, rightStickValue);
+    	Robot.driveTrainSub.tankDrive(-leftStickValue, rightStickValue);
     }
 
     // Make this return true when this Command no longer needs to run execute()
