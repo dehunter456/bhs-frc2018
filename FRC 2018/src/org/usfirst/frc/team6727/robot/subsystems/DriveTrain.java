@@ -3,7 +3,7 @@ package org.usfirst.frc.team6727.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team6727.robot.RobotMap;
-import org.usfirst.frc.team6727.robot.commands.DriveTrainCommand;
+import org.usfirst.frc.team6727.robot.commands.Drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -12,11 +12,14 @@ import com.ctre.phoenix.motorcontrol.can.*;
 /**
  *
  */
-public class DriveTrainSubsystem extends Subsystem {
+public class DriveTrain extends Subsystem {
 
     private VictorSPX leftMaster, rightMaster, leftFollower, rightFollower;
+    private double velScalar;
     
-    public DriveTrainSubsystem () {
+    public DriveTrain () {
+    	velScalar = 0.5;
+    	
     	leftMaster = new VictorSPX(RobotMap.LEFT_MASTER);
         rightMaster = new VictorSPX(RobotMap.RIGHT_MASTER);
         leftFollower = new VictorSPX(RobotMap.LEFT_FOLLOWER);
@@ -61,12 +64,20 @@ public class DriveTrainSubsystem extends Subsystem {
     	 * @param lVel A double from -1.0 to 1.0 that controls the left motor's velocity.
     	 * @param rVel A double from -1.0 to 1.0 that controls the right motor's velocity. */
     	
-    	leftMaster.set(ControlMode.PercentOutput, lVel);
-    	rightMaster.set(ControlMode.PercentOutput, rVel);
+    	leftMaster.set(ControlMode.PercentOutput, velScalar * lVel);
+    	rightMaster.set(ControlMode.PercentOutput, velScalar * rVel);
+    }
+    
+    public void setVelScalar (double scalar) {
+    	velScalar = scalar;
+    }
+    
+    public double getVelScalar () {
+    	return velScalar;
     }
     
     public void initDefaultCommand() {
-        setDefaultCommand(new DriveTrainCommand());
+        setDefaultCommand(new Drive());
     }
 }
 

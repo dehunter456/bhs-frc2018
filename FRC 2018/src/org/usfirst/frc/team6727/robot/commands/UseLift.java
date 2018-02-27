@@ -7,31 +7,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveTrainCommand extends Command {
+public class UseLift extends Command {
 
-    public DriveTrainCommand () {
-        requires(Robot.driveTrainSub);
+    public UseLift() {
+        requires(Robot.pulleySub);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize () {
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute () {
-    	double leftStickValue = Robot.m_oi.getController().getRawAxis(1), 
-    			rightStickValue = Robot.m_oi.getController().getRawAxis(5);
+    protected void execute() {
+    	double motorVel = Robot.m_oi.getController().getRawAxis(3) - Robot.m_oi.getController().getRawAxis(2);
     	
-    	Robot.driveTrainSub.tankDrive(-leftStickValue, rightStickValue);
+    	Robot.pulleySub.useLift(motorVel * 0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished () {
+    protected boolean isFinished() {
         return false;
     }
 
     // Called once after isFinished returns true
-    protected void end () {
+    protected void end() {
     }
 
     // Called when another command which requires one or more of the same

@@ -19,5 +19,7 @@ public class RobotMap {
 			LEFT_MASTER = 1, 
 			RIGHT_MASTER = 2, 
 			LEFT_FOLLOWER = 3, 
-			RIGHT_FOLLOWER = 4;
+			RIGHT_FOLLOWER = 4,
+			PULLEY = 11,
+			INTAKE = 21;
 }
